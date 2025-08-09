@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador PID Interativo</title>
+    <link rel="stylesheet" href="src/css/layout.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>Simulador PID Realístico</h1>
+        <p>Visualize a resposta do sistema e o esforço de controle necessário para vencer uma carga constante,
+            como a gravidade.</p>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="panel controls-panel">
+            <h2>Controles</h2>
+            <div class="control-group">
+                <label for="kp-slider">Ganho Proporcional (Kp): <span class="slider-value"
+                        id="kp-value">1.50</span></label>
+                <input type="range" id="kp-slider" min="0" max="10" step="0.1" value="1.5"
+                    title="Reage ao erro atual. Aumente para uma resposta mais rápida, mas cuidado com oscilações.">
+            </div>
+            <div class="control-group">
+                <label for="ki-slider">Ganho Integral (Ki): <span class="slider-value" id="ki-value">0.50</span></label>
+                <input type="range" id="ki-slider" min="0" max="2" step="0.05" value="0.5"
+                    title="Elimina o erro residual acumulando os erros do passado. Essencial para sistemas com carga.">
+            </div>
+            <div class="control-group">
+                <label for="kd-slider">Ganho Derivativo (Kd): <span class="slider-value"
+                        id="kd-value">3.50</span></label>
+                <input type="range" id="kd-slider" min="0" max="10" step="0.1" value="3.5"
+                    title="Amortece a resposta prevendo o erro futuro. Reduz o overshoot.">
+            </div>
+
+            <div class="button-group">
+                <button id="reset-button" class="button">Reiniciar</button>
+                <button id="disturbance-button" class="button">Aplicar Perturbação</button>
+            </div>
+
+            <h2 style="margin-top: 1.5rem;">Cenários de Demonstração</h2>
+            <div class="preset-group">
+                <button class="preset-button" data-preset="p_only">Puro P</button>
+                <button class="preset-button" data-preset="pi">Controle PI</button>
+                <button class="preset-button" data-preset="pid_damped">PID Amortecido</button>
+                <button class="preset-button" data-preset="pid_oscillatory">PID Oscilatório</button>
+            </div>
+        </aside>
+
+        <main class="panel main-visualization">
+            <h2>Resposta do Sistema</h2>
+            <div class="graph-container">
+                <canvas id="pidChart"></canvas>
+            </div>
+        </main>
+
+        <aside class="panel analysis-panel">
+            <h2>Análise Numérica</h2>
+            <div class="data-point">
+                <div class="label">Erro Atual</div>
+                <div class="value" id="currentErrorSpan">0.00</div>
+            </div>
+            <div class="data-point">
+                <div class="label">Termo Proporcional (P)</div>
+                <div class="value" id="pTermSpan">0.00</div>
+            </div>
+            <div class="data-point">
+                <div class="label">Termo Integral (I)</div>
+                <div class="value" id="iTermSpan">0.00</div>
+            </div>
+            <div class="data-point">
+                <div class="label">Termo Derivativo (D)</div>
+                <div class="value" id="dTermSpan">0.00</div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script type="module" src="src/js/main.js"></script>
+</body>
+
+</html>

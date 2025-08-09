@@ -1,0 +1,244 @@
+/* ==================== */
+/* VARIÁVEIS DE DESIGN */
+/* ==================== */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --background-color: #f8f9fa;
+    --card-background: #ffffff;
+    --text-color-primary: #212529;
+    --text-color-secondary: #6c757d;
+    --border-color: #ced4da;
+    --border-radius: 0.3rem;
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --transition-duration: 0.15s;
+    --transition-easing: ease-in-out;
+}
+
+/* ==================== */
+/* ESTILOS GERAIS       */
+/* ==================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
+    line-height: 1.5;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* ==================== */
+/* LAYOUT MOBILE FIRST  */
+/* ==================== */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.panel {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color);
+}
+
+h1,
+h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+/* Controles */
+.control-group {
+    margin-bottom: 1.2rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+}
+
+.slider-value {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    height: 35px;
+}
+
+/* Botões */
+.button,
+.preset-button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-easing);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 0.6rem;
+}
+
+.button:hover,
+.preset-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+#reset-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+#reset-button:hover {
+    background-color: var(--secondary-hover);
+}
+
+#disturbance-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#disturbance-button:hover {
+    background-color: var(--primary-hover);
+}
+
+#disturbance-button.active {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+#disturbance-button.active:hover {
+    background-color: var(--danger-hover);
+}
+
+.preset-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+}
+
+/* Gráfico */
+.graph-container {
+    position: relative;
+    flex-grow: 1;
+    min-height: 300px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Painel de análise */
+.data-point {
+    background-color: var(--card-background);
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.data-point .label {
+    font-size: 0.8rem;
+    color: var(--text-color-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.data-point .value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.graph-container {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.graph-container canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* ======= CABEÇALHO ======= */
+.page-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    background-color: var(--background-color);
+    padding: 1rem;
+}
+
+.page-header h1 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: var(--text-color-secondary);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+/* ==================== */
+/* LAYOUT PARA TELAS MAIORES */
+/* ==================== */
+@media (min-width: 768px) {
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .preset-group {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .graph-container {
+        min-height: 350px;
+    }
+
+    .data-point .value {
+        font-size: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+}
